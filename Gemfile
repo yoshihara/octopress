@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source "http://rubygems.org"
 
 group :development do
   gem 'rake', '~> 0.9'
@@ -15,5 +15,5 @@ group :development do
   gem 'liquid', '~> 2.3.0'
 end
 
-gem 'sinatra', '~> 1.4.2'
-gem "rails"
+gem "rails", ">= 3.0.0"
+gem "sinatra", "1.3.4"
