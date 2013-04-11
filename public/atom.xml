@@ -4,7 +4,7 @@
   <title><![CDATA[大変なことにならないようにした!]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2013-04-10T23:54:36+09:00</updated>
+  <updated>2013-04-12T01:28:46+09:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[yshr]]></name>
@@ -20,9 +20,9 @@
     <id>http://yoursite.com/blog/2013/04/10/test-first</id>
     <content type="html"><![CDATA[<h2>はじめてみました</h2>
 
-<p>移行先として。まだどうするかあまり決めてない。</p>
-
-<p>メモ：titleがh1(#), 本文での見出し最初はh2(##)textileだとたぶん間違わない</p>
+<p>移行先として。まだどうするかあまり決めてない。
+自動で書き換わるのかテスト。
+メモ：titleがh1(#), 本文での見出し最初はh2(##)textileだとたぶん間違わない</p>
 ]]></content>
   </entry>
   
