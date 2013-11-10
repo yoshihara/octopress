@@ -1,0 +1,19 @@
+---
+layout: post
+title: "TokyuRuby会議2013に参加しました"
+date: 2013-06-30 22:46
+comments: true
+categories: log
+---
+今回はじめて参加しました。
+LTと後半LTのドラをしてました。LTのスライドは↓です。
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/23661532" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="http://www.slideshare.net/yoshihara/tokyurb06-23661532" title="&quot;uwaaaa&quot;から英文に変わったコミットログを見て自分の書き方をまとめてみた" target="_blank">&quot;uwaaaa&quot;から英文に変わったコミットログを見て自分の書き方をまとめてみた</a> </strong> from <strong><a href="http://www.slideshare.net/yoshihara" target="_blank">yoshihara</a></strong> </div>
+
+もうちょっとネタに走りたかったけど思いついたネタがコレだった。面白い話をしたいです……。でもLT投票に誰かが入れてくれてたり、話しかけてくださったりで嬉しかったですありがとうございました。
+
+あと私はどうして[コミットへのコメントサービス](http://www.clear-code.com/services/commit-comment.html)の宣伝を2回もしたのだろう……もしかしたらLTでの言い方が悪くて勘違いされてるかもしれないけど、コミットは読まれるものだという意識が高まったよっていう話をしたかったのです。こわくないこわくない。というか、クリアコードにいる時点でコミットは普段から読むもんだという意識になっているので、むしろ読まない状況があまり浮かばない感じです（といいつつ、最近BlackBerryでチラ見するだけになってるけど）
+
+全体としては、LT含め全体のノリが面白かったりで楽しかったです。綺麗にだいたい酔っ払っていらっしゃった。あとTシャツが可愛かった。
+
+あとビールおいしいです。そして食べ物として鶏はむを作って持って行ったりしました。つまんでくれた人ありがとうございました。ちなみにレシピはくっくぱっどさんで探しました。

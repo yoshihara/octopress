@@ -11,3 +11,14 @@ source/_stash
 source/stylesheets/screen.css
 vendor
 node_modules
+source/assets/jwplayer/
+/sass/
+/source/_includes/
+/source/atom.xml
+/source/blog/archives/
+/source/favicon.png
+/source/font/
+/source/images/
+/source/index.html
+/source/javascripts/
+/source/robots.txt
