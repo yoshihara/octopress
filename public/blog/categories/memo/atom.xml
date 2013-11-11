@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: memo | 大変なことにならないようにした!]]></title>
+  <link href="http://not-taihen.ruby.iijgio.com/blog/categories/memo/atom.xml" rel="self"/>
+  <link href="http://not-taihen.ruby.iijgio.com/"/>
+  <updated>2013-11-12T00:16:04+09:00</updated>
+  <id>http://not-taihen.ruby.iijgio.com/</id>
+  <author>
+    <name><![CDATA[yshr]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[新しいことを始めるにはドメインを知るのが大事と思って考えたことメモ]]></title>
+    <link href="http://not-taihen.ruby.iijgio.com/blog/2013/08/15/pa-na-domain/"/>
+    <updated>2013-08-15T23:52:00+09:00</updated>
+    <id>http://not-taihen.ruby.iijgio.com/blog/2013/08/15/pa-na-domain</id>
+    <content type="html"><![CDATA[<p>　どうもパーナでーす☆というテンションでした一時期。まあ私あの日はまっすぐ家に帰って翌日夕方にまた普通に会場に行きましたが。twitterにはレポしか投げてない感じのゆるいパーナです。というかそもそもファンに呼び名を付けるのってどうなんだろうねと思ってる感じです。別にファンで団結する気ないしさ……。「私たちパーナでにゅーすを応援しよう☆」みたいなテンションでジャニオタやってないしさ……。わたくしただにゅーすを見たいだけなので、他のファンとは仲良くなれる人と話せればいいかなーぐらいで手当たりしだい仲良くする気ないです。閑話休題。</p>
+
+<p>　最近になってRailsでwebアプリの実装をするようになって、初めての分野に入る時にはまずは言葉の意味を知るのが大事なんだなあと痛感したのでメモしておきます。（あまり文章自体にまとまりなくて、例とかもっと色々出してわかりやすく書きたいけれど現状は書けそうにないので、とりあえずメモとして。いつかまたリベンジしたい。）</p>
+
+<p>　今まで別のところで聞いたことある単語であっても、違うところでは全く違う意味合いだったりして、ちょっと戸惑うことがあります。戸惑うくらいならいいんですが、違う意味だと思ったまま人と喋ると、実はそのなんとなく把握してた意味も違ったりしてえらい目に合います。お前は何を言っているのか状態。ボタンの掛け違いというか。お互いに自分の使う言葉はこの意味で間違いないと思ってるから余計に面倒です。間違いを正すのはそれが間違いだと気づいてないといけないので、まず間違いだと認識するのにコストがかかってしまいます。</p>
+
+<p>　例えば、（Railsの話ではないですが）最初「スペックを今書いてる」と聞いて「ヘー仕様ちゃんと資料にまとめるんだー」と思ったけど、実は仕様じゃなくてRspecだったみたいなことがありました。コードじゃなくてお固い書類を想像していました。</p>
+
+<p>　さらにRailsというかwebアプリの話ですが、最近までCRUDをviewも含めた機能のことだと思っていて、viewいらないからCRUDいらないよねーとか言い出して相手をびっくりさせたりしてました。こういうのって妙にショックを受けるのって少数派なんですかね。今まで間違えてたのかっていう後悔というか。</p>
+
+<p>　ということで、ある分野で使われる言葉とその定義＝ドメインを知るのは大事だよねと思ったわけです。すでにその分野にいる人からするとドメインの単語は当たり前なので、まずそれを知らないとその人達と話がしにくいわけです。結局は言葉をしらないと話ができないし理解もできないんではないかという。そういえば、初心者向きの本ってこういうドメインをちゃんと説明している本じゃないのかな。いわゆる「専門用語だらけでわからない」本というのはドメインを知っていること前提で書かれている本っぽいイメージです。</p>
+
+<p>　そういうとパーナ（＝NEWSファンのこと）もドメインです。たぶんジャニオタドメイン。パーナに関しては、非ジャニオタの人に「あれって特定の人の呼び方じゃないの？」と言われたりしました。パーナ以外のジャニオタドメインだと、例えば「オーラス」とか「魂」とか「担当」とか「自担」とがあります。（「担当」関連の単語はいっぱいあるだろうなあ）NEWSドメインだとなんだろうね。パッとは出てきませんが今だと化け猫とかでしょうか。メンバーのあだ名とかメンバーカラーとかもある意味ドメインのように思います。（断っておくと、これは私による勝手な分類です。他の人がどう思ってるのか聞いてみたい）</p>
+
+<p>　話を戻して、実際にドメインを知るにはどうするかというと、まずわからなくなったら詳しい人に聞く。多分このへんだろうと思っても聞く。詳しい人には当然のことなので恥ずかしいのですが、「あなたには当然でも初心者の私にはわかんないんです」ぐらいに開き直りたい。あとは本を読んだりですかね。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jinbochorb第1回目に参加してきた]]></title>
+    <link href="http://not-taihen.ruby.iijgio.com/blog/2013/04/29/jinbochorb1/"/>
+    <updated>2013-04-29T23:50:00+09:00</updated>
+    <id>http://not-taihen.ruby.iijgio.com/blog/2013/04/29/jinbochorb1</id>
+    <content type="html"><![CDATA[<p>1週間以上前ですが、<a href="http://jinbochorb.doorkeeper.jp/events/3482/">jinbocho.rb第1回目</a>に参加してきました。内容はmrubyでHello World+α。</p>
+
+<p>事前知識ですが、mrubyはほんとに話しか聞いてなくて、直接触ろう触ろうと思ってるところどまりでした。jinbochorbではmrubyをビルドして、自分でmrbgemsを使って拡張するところまで教わりました。結果、「mruby触るのたのしいなあ」と思いました。（現在ビルド環境を整えてます……そういえば昔もnewlib+gccでクロスコンパイル環境つくろうと思って挫折した記憶が。じぶんのRubyOSをmrubyで動かせたらたのしそうだなあと思って……思って……。）あとmrbgemsのCでの書き方がcrubyの拡張ライブラリの書き方に似てたのが印象的でした。あとissueに目を通したい。</p>
+
+<p>2回目はmrubyじゃなくてrailsになるかもしれない、というお話でしたが、もーまんたいなので行く気でいます。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[うむ]]></title>
+    <link href="http://not-taihen.ruby.iijgio.com/blog/2013/04/13/the-first-article/"/>
+    <updated>2013-04-13T23:17:00+09:00</updated>
+    <id>http://not-taihen.ruby.iijgio.com/blog/2013/04/13/the-first-article</id>
+    <content type="html"><![CDATA[<p>移転しました。</p>
+
+<p>やりたいこと：</p>
+
+<ul>
+<li>つくってるものの紹介</li>
+<li>MOGOKにOctopress載せて記事を書いて更新するまでをQiitaに書く</li>
+<li>EvernoteをOAuthしてノート作る・検索するところをQiitaに書く</li>
+<li>記事を更新するまでをEmacsで完結させるための準備（自分でelisp書いてもよさそう）</li>
+</ul>
+
+
+<p>とりあえず書くことがないので今後の予定を書いた。
+Qiitaとの使い分けはたぶん、普通の文章はこっち、コードとかコマンドがメインの場合はQiita、になるんだと思う。MOGOKの記事ぐらいこっちのほうがいいのかな。まあいいか
+。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[test-first]]></title>
+    <link href="http://not-taihen.ruby.iijgio.com/blog/2013/04/10/test-first/"/>
+    <updated>2013-04-10T23:50:00+09:00</updated>
+    <id>http://not-taihen.ruby.iijgio.com/blog/2013/04/10/test-first</id>
+    <content type="html"><![CDATA[<h2>はじめてみました</h2>
+
+<p>移行先として。まだどうするかあまり決めてない。
+自動で書き換わるのかテスト。
+メモ：titleがh1(#), 本文での見出し最初はh2(##)textileだとたぶん間違わない</p>
+]]></content>
+  </entry>
+  
+</feed>

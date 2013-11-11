@@ -1,0 +1,212 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Pull Requestとかバグのパッチをもらったときのレビュー手順 - 大変なことにならないようにした!</title>
+	<meta name="author" content="yshr">
+
+	
+	<meta name="description" content="はじめに 今の職場でPull Request（以下、PR）をよく使っています。（前職でも使っていましたが、今の職場の方が回数が多いです。）コードレビューでPRを使っています。 そこで、PRを確認するときの手順を説明してみます。前職ではバグ修正のパッチ（以下ではPRとまとめます） &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="大変なことにならないようにした!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">大変なことにならないようにした!</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:not-taihen.ruby.iijgio.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/hyoshihara04" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/yoshihara" title="GitHub">GitHub</a>
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:not-taihen.ruby.iijgio.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Pull Requestとかバグのパッチをもらったときのレビュー手順</h2>
+	<div class="entry-content"><h2>はじめに</h2>
+
+<p>今の職場でPull Request（以下、PR）をよく使っています。（前職でも使っていましたが、今の職場の方が回数が多いです。）コードレビューでPRを使っています。</p>
+
+<p>そこで、PRを確認するときの手順を説明してみます。前職ではバグ修正のパッチ（以下ではPRとまとめます）を取り込むときに次のことを確認していたので、コードレビューでもバグ修正に対してもどちらでも使えると思っています。（ただ、一部、スキップできそうな手順もあります。）</p>
+
+<h2>レビュー手順概要</h2>
+
+<p>PRを見るときには、次の4点を確認します。なお、PRの目的は把握済みであるという前提で進みます。またPull Requestの方は機能追加が目的であるという仮定のもと進みます。</p>
+
+<ol>
+<li>PRを取り込む前にPRの目的のものが本当にないのか（バグはあるか）</li>
+<li>そのPRのコードそのものに問題がないか</li>
+<li>PRがある状態での動作に問題はないか（機能がどう変わったか、バグが直ったか）</li>
+<li>テストに影響はないか</li>
+</ol>
+
+
+<p>それぞれ解説します。</p>
+
+<h2>PRを取り込む前にPRの目的のものが本当にないのか（バグはあるか）</h2>
+
+<p>ある機能についてPRされたなら、その機能が現状（PRを取り込む前）に本当にないのかを確認します。これは、把握済みのことも多いのでスキップする手順かもしれません。特に、業務でなら存在しない機能であることを前提に実装してPRしているはずなので、まずない話ではあります。（少なくとも私の場合はそうです。）</p>
+
+<p>バグの場合は指摘されたバグが本当に再現するかどうかを確認します。バグの場合は把握していない場合も多いので必ず確認します。また、ここでバグ確認手順を作っておくと後で使えます。</p>
+
+<p>もし仮に、機能があるならPRを受け取る必要もないですし、バグがないならパッチを取り込む必要もないです。そこをはっきりさせるのがこの手順の目的です。</p>
+
+<h2>そのPRのコードそのものに問題はないか</h2>
+
+<p>次にコードを見ます。目でコードがちゃんと動きそうか確認します。あとはコーディングスタイルがどうとかも見ます。（ただ、ここで指摘するより取り込んだ後に自分で直したほうがいいかもしれませんが）もし何か問題があったらコメントを入れてPRしてくれた人に返します。</p>
+
+<h2>PRがある状態での動作に問題はないか（機能がどう変わったか、バグが直ったか）</h2>
+
+<p>PRのブランチに移動してみて、実際に動かします。機能の追加の場合はその機能がちゃんと動くか確認し、バグの場合はバグが発生しないことを確認します。1つ目の項目でバグ確認手順をとっておいた場合、それを使うことで、PRを取り込む前にあったバグが取り込むと発生しないことを確実に確認できます。</p>
+
+<p>テストで全て確認できるならいいのかな……。（まだ迷っているところ）</p>
+
+<h2>テストに影響はないか</h2>
+
+<p>テストを走らせます。その機能単独ではよくても、他の機能に影響がないかを調べるためです。テスト大事。</p>
+
+<p>また、追加してもらった機能orバグに対応するテストがない場合は自分で書くかPRしてくれた人にコメントします。（業務の場合はコメントして書いてもらうパターンだと思います。その状況になったことがないのでわかりません）</p>
+
+<h2>おわりに</h2>
+
+<p>前職での手順をもとに、現在よく行っているコードレビューも合わせて説明しました。</p>
+
+<p>メモ：（新しい職の話は試用期間終了後の名刺をもらってから書く予定）</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-12T00:07:00+09:00" pubdate data-updated="true">Nov 12<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+</div>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    yshr
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'not-taihen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://not-taihen.ruby.iijgio.com/blog/2013/11/12/review-pr/';
+        var disqus_url = 'http://not-taihen.ruby.iijgio.com/blog/2013/11/12/review-pr/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>

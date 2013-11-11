@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://not-taihen.ruby.iijgio.com/sitemap.xml 

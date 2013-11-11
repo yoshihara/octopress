@@ -1,0 +1,287 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>groongaのコマンドラインインタフェースをほんのり使いやすくするgrnlineというラッパーをつくりました - 大変なことにならないようにした!</title>
+	<meta name="author" content="yshr">
+
+	
+	<meta name="description" content="動機：groongaを触った話 全文検索エンジンgroongaにはコマンドラインから実行することのできるインタフェースがあります。例えば、次のようにするとコマンドラインのインタフェースで起動します。 % groonga -n /path/to/db &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="大変なことにならないようにした!" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script async="true" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">大変なことにならないようにした!</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:not-taihen.ruby.iijgio.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/hyoshihara04" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/yoshihara" title="GitHub">GitHub</a>
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+    
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:not-taihen.ruby.iijgio.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Groongaのコマンドラインインタフェースをほんのり使いやすくするgrnlineというラッパーをつくりました</h2>
+	<div class="entry-content"><h2>動機：groongaを触った話</h2>
+
+<p><a href="http://groonga.org/ja/">全文検索エンジンgroonga</a>にはコマンドラインから実行することのできるインタフェースがあります。例えば、次のようにするとコマンドラインのインタフェースで起動します。</p>
+
+<pre><code>% groonga -n /path/to/db
+</code></pre>
+
+<p><a href="http://groonga.org/ja/docs/tutorial.html">groongaのチュートリアル</a>はこのコマンドラインのインタフェースを使うようになっています。が、昔このチュートリアルをやってる時にtypoした位置まで方向キーで戻れなくて、BSでその位置まで消して戻らないといけないのでコピペの衝動にかられました。ですが、私は自分で打たないとさらに覚えられないのでコピペしたくなかったので大変でした。チュートリアルやるのって大体コマンドとか打ち慣れてないころなので、割と打ち間違えるのよね……わたくし……。</p>
+
+<p>で、当時はgrnwrapというPythonでできたラッパーを使っていたような記憶があるのですが、自分で作ったほうが色々やりたいようにできるよねえ、と思いました。（あと、私のやり方がまずいのか前からなのか、複数行の入力がgrnwrapだとできない……）</p>
+
+<h2>grnline：つくったものの話</h2>
+
+<p>ということでRubyでgrnline（ぐるんらいん）というgemを自作しました。<a href="https://github.com/yoshihara/grnline">ソースコードはGitHubにあります。</a>現在のバージョンは0.0.2です。名前の由来は語感です。</p>
+
+<p>gemとしてrubygems.orgにpushしているので、次のコマンドでインストールできます。</p>
+
+<pre><code>% gem install grnline
+</code></pre>
+
+<p>インストールするとgrnlineコマンドが使えるようになります。grnlineはgroongaのコマンドラインのインタフェースに次の機能を追加します。</p>
+
+<ul>
+<li>入力時に方向キーでカーソルの移動（Ctrl-Aで先頭に移動とかもできます）</li>
+<li>groongaコマンドの補完</li>
+<li>入力を履歴として保持</li>
+<li>出力形式がJSON（デフォルト）のときのみ結果を整形表示</li>
+</ul>
+
+
+<p>上3つはReadlineの機能を利用しています。JSONの整形表示はjson gemを使用しています。例えば、次のように整形して表示します。（最初の行の&#8221;groonga> &#8220;がコマンド入力している行です）</p>
+
+<pre><code>groonga&gt; tokenize TokenBigram "groonga"
+[
+  [
+    0,
+    1371307770.1403,
+    0.00029301643371582
+  ],
+  [
+    {
+      "value": "gr",
+      "position": 0
+    },
+    {
+      "value": "ro",
+      "position": 1
+    },
+    {
+      "value": "oo",
+      "position": 2
+    },
+    {
+      "value": "on",
+      "position": 3
+    },
+    {
+      "value": "ng",
+      "position": 4
+    },
+    {
+      "value": "ga",
+      "position": 5
+    },
+    {
+      "value": "a",
+      "position": 6
+    }
+  ]
+]
+</code></pre>
+
+<p>整形表示のON/OFFなど、grnlineについてのオプションについてはインストール後に次のコマンドを実行してください。</p>
+
+<pre><code>% grnline -- -h
+</code></pre>
+
+<p>なぜ<code>"--"</code>が必要かというと、<code>"--"</code>の前に書くとgroongaコマンドに渡すオプションとみなすようにしているからです。というか、<code>"--"</code>より前に指定されたものはすべてgroongaコマンドにそのまま丸投げしています。なので、次のように<code>"--"</code>を入れないとgroongaのヘルプを表示します。</p>
+
+<pre><code>% grnline -h
+</code></pre>
+
+<p><code>"--"</code>の後ろでなく前がgroongaへのオプションになっている理由ですが、groongaのラッパーとしてgrnlineを使って欲しいので、groongaを使うように使えたらいいなあと思ったからです。groongaを実行するときに書くオプションはgrnlineでも同じようにかけるとべんりかなあとおもいました。一方、grnlineにも整形表示の有無とかまだ実装してないけどページャーの設定とかオプションをとらせたいという理由から、こういう書き方をするようにしました。</p>
+
+<h2>TODO：ケツ叩きリスト</h2>
+
+<p>やりたいことリストは公開して己のケツを叩きやがれってばっちゃが言ってた。たぶん上から実装する。</p>
+
+<ul>
+<li>履歴を保存して次回以降の実行時も使えるようにする</li>
+<li>groongaコマンドの引数（&#8211;tableとか&#8211;filterとか）についても補完できるようにする</li>
+<li>実行結果をページャーで表示
+
+<ul>
+<li>pryで実行結果を表示するときみたいなのをやりたい</li>
+</ul>
+</li>
+<li>JSONのもっと手を抜いた整形表示
+
+<ul>
+<li>現在、json gemのJSON.pretty_generateを使って整形しているけど、そこまで改行しなくていいです感がある</li>
+<li>要素が短かったら1行で表示するor一番小さい配列は1行で表示するぐらいの整形表示にしたい。orじゃなくてandかも</li>
+<li>イメージは<a href="http://qiita.com/items/5acfec72a0480d453088">groonga公式がQiitaに書いている記事</a>に出てくる実行結果ぐらいの整形加減</li>
+<li>というか今pryでJSONパースしたらイメージに近い感じの整形表示されたのでこれを目指したい</li>
+</ul>
+</li>
+<li>JSON以外のoutput_typeでの整形表示
+
+<ul>
+<li>どうやってoutput_typeを判別するかが問題（今はJSONとしてパースしようとして、例外起きたらそのまま表示するようにしている）</li>
+<li>コマンドごとに指定できるので、コマンドをパースしてoutput_typeがあるかどうかを確かめてどうこう、になるとちょっと違う気がする</li>
+<li>コマンドラインからgroonga触るときにJSON以外をどれくらい使うのかわからない（TSVの方が見やすいとか？）のであまり優先順位高くない（そもそもデフォルトのJSONでやっているチュートリアルで楽したいっていう目的で始めましたし）</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>余談：ひとりでgemリリース</h2>
+
+<p>考えたら自分だけでgemリリースしたのって始めてでした。最初入れたかった変更入れ忘れてバージョを無駄に上げた（0.0.1 -> 0.0.2）のはいい思い出です。冗談です。</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-15T23:12:00+09:00" pubdate data-updated="true">Jun 15<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/groonga/'>groonga</a>, <a class='category' href='/blog/categories/my/'>my</a>
+
+
+</div>
+	
+	<div class="comments"><a href="#disqus_thread">Comments</a></div>
+	
+</div>
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+		
+		
+		<a class="addthis_button_tweet"></a>
+		
+		
+		
+	</div>
+	
+</div>
+
+
+
+<section id="comment">
+    <h2 class="title">Comments</h2>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    yshr
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'not-taihen';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://not-taihen.ruby.iijgio.com/blog/2013/06/15/grnline/';
+        var disqus_url = 'http://not-taihen.ruby.iijgio.com/blog/2013/06/15/grnline/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//go.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+</body>
+</html>
